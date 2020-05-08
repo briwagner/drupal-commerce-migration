@@ -1,0 +1,72 @@
+id: variations_basic
+label: Get product variations
+migration_group: basic_commerce
+migration_tags:
+  - products
+  - product_variations
+source:
+  plugin: url
+  data_fetcher_plugin: file
+  data_parser_plugin: json
+  urls: 'public://variations.json'
+  ids:
+    sku:
+      type: string
+  item_selector: variations
+
+  fields:
+    -
+      name: sku
+      label: "Variation sku"
+      selector: "sku"
+    -
+      name: product_number
+      label: "Parent product number"
+      selector: "parent_product_number"
+    -
+      name: price
+      label: "Variation price"
+      selector: "price"
+    -
+      name: item_color
+      label: "Attribute color"
+      selector: "color"
+
+process:
+  type:
+    plugin: default_value
+    default_value: default
+  uid:
+    plugin: default_value
+    default_value: 1
+  sku: sku
+  product_id:
+    -
+      plugin: entity_lookup
+      entity_type: commerce_product
+      bundle: default
+      value_key: field_product_number
+      source: product_number
+  attribute_color/target_id:
+    -
+      plugin: migration
+      migration: attribute_colors
+      source: item_color
+  price/number: price
+  price/currency_code:
+    plugin: default_value
+    default_value: USD
+
+destination:
+  plugin: 'entity:commerce_product_variation'
+  destination_module: commerce_product
+
+migration_dependencies:
+  required:
+    - products_basic
+    - attribute_colors
+
+dependencies:
+  enforced:
+    module:
+      - basic_commerce_migrate

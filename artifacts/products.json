@@ -1,0 +1,7 @@
+{
+  "products": [
+    {"title": "First product", "description": "This is the first product", "product_number": "100"},
+    {"title": "Second product", "description": "This is the second product", "product_number": "102"},
+    {"title": "Third product", "description": "This is the third product", "product_number": "103"}
+  ]
+}

@@ -1,0 +1,12 @@
+name: Basic Commerce Migrate
+description: Basic migration for Commerce
+type: module
+core: 8.x
+package: Custom
+dependencies:
+  - commerce:commerce (>=8.x-2.17)
+  - commerce:commerce_product
+  - commerce:commerce_order
+  - drupal:migrate
+  - migrate_plus:migrate_plus
+  - migrate_tools:migrate_tools

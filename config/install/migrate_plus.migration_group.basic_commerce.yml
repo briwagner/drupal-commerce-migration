@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+id: basic_commerce
+label: 'Basic Commerce Import'
+description: 'Import products and variations with attributes'
+source_type: JSON file
+
+# Define the self-module as dependency to auto-remove the config on uninstall.
+# This doesn't work. So we have an uninstall operation.
+dependencies:
+  enforced:
+    module:
+      - basic_commerce_migrate

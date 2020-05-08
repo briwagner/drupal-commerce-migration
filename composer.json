@@ -1,0 +1,11 @@
+{
+  "name": "bwagner/basic_commerce_migrate",
+  "description": "Drupal 8 module to demonstrate basic migrations for Commerce entities.",
+  "type": "drupal-module",
+  "minimum-stability": "dev",
+  "require": {
+    "drupal/commerce": "^2",
+    "drupal/migrate_plus": "^5",
+    "drupal/migrate_tools": "^5"
+  }
+}

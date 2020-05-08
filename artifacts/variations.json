@@ -1,0 +1,8 @@
+{
+  "variations": [
+    {"sku": "1000", "parent_product_number": "100", "color": "Red", "price": "4.50"},
+    {"sku": "1005", "parent_product_number": "100", "color": "Orange", "price": "4.50"},
+    {"sku": "1010", "parent_product_number": "100", "color": "Yellow", "price": "4.50"},
+    {"sku": "1015", "parent_product_number": "100", "color": "Green", "price": "4.50"}
+  ]
+}

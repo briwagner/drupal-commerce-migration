@@ -1,0 +1,36 @@
+id: attribute_colors
+label: Get color attributes
+migration_group: basic_commerce
+migration_tags:
+  - attributes
+source:
+  plugin: url
+  data_fetcher_plugin: file
+  data_parser_plugin: json
+  urls: 'public://colors.json'
+  ids:
+    color_name:
+      type: string
+  item_selector: colors
+
+  fields:
+    -
+      name: color_name
+      label: "Attribute color"
+      selector: value
+
+process:
+  name: color_name
+  attribute:
+    plugin: default_value
+    default_value: color
+
+destination:
+  plugin: 'entity:commerce_product_attribute_value'
+
+migration_dependencies: {  }
+
+dependencies:
+  enforced:
+    module:
+      - basic_commerce_migrate

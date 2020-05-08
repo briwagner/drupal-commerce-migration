@@ -1,0 +1,40 @@
+<?php
+
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
+
+/**
+ * @file
+ * Manage install/uninstall events.
+ */
+
+ /**
+  * Implements hook_uninstall().
+  */
+  function basic_commerce_migrate_uninstall() {
+    // We have to manually delete the migration-group.
+    $configs = [
+      'migrate_plus.migration_group.basic_commerce',
+      'commerce_product.commerce_product_attribute.color',
+    ];
+
+    foreach ($configs as $config) {
+      \Drupal::configFactory()->getEditable($config)->delete();
+    }
+
+    // Delete fields.
+    if ($field_attr = FieldConfig::loadByName('commerce_product_variation', 'default', 'attribute_color')) {
+      $field_attr->delete();
+    }
+    if ($field_pn = FieldConfig::loadByName('commerce_product', 'default', 'field_product_number')) {
+      $field_pn->delete();
+    }
+
+    // Delete field storage.
+    if ($fpn = FieldStorageConfig::loadByName('commerce_product', 'field_product_number')) {
+      $fpn->delete();
+    }
+    if ($attr = FieldStorageConfig::loadByName('commerce_product_variation', 'attribute_color')) {
+      $attr->delete();
+    }
+  }

@@ -1,0 +1,50 @@
+id: products_basic
+label: Get products
+migration_group: basic_commerce
+migration_tags:
+  - products
+source:
+  plugin: url
+  data_fetcher_plugin: file
+  data_parser_plugin: json
+  urls: 'public://products.json'
+  ids:
+    product_number:
+      type: string
+  item_selector: products
+
+  fields:
+    -
+      name: product_number
+      label: "Product Number"
+      selector: product_number
+    -
+      name: product_title
+      label: "Product title"
+      selector: title
+    -
+      name: description
+      label: "Product description"
+      selector: description
+
+process:
+  type:
+    plugin: default_value
+    default_value: default
+  title: product_title
+  field_product_number: product_number
+  body/value: description
+  body/format: basic_html
+  uid:
+    plugin: default_value
+    default_value: 1
+
+destination:
+  plugin: 'entity:commerce_product'
+
+migration_dependencies: {}
+
+dependencies:
+  enforced:
+    module:
+      - basic_commerce_migrate
